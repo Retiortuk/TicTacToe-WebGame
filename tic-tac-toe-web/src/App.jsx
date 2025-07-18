@@ -1,5 +1,5 @@
+import { useEffect } from 'react';
 import { useState } from 'react'
-
 
 function Square({value, onSquareClick}) { // value is a prop that declared in app() value of value is {squares}, onSquareClick is the same
 
@@ -29,15 +29,28 @@ export default function App() {
 
   }
 
-  // if win
+  // if win and draw
   const winner = rulesWin(squares);
   let status;
 
   if(winner) {
     status = `Congratulations ${winner} is the Winner!`;
+  } else if (!squares.includes(null)) {
+    status = "Game Draw Quite Intense!"
   } else {
     status = "Player " + (xItIs ? 'x' : 'o') + " Turn";
   }
+
+  // Play Audio If WIN
+  useEffect(() => {
+    if(winner) {
+      const audioWin = new Audio('/Victory_Sound_Effect.mp3');
+      audioWin.play();
+    } else if (!squares.includes(null)) {
+      const audioDraw = new Audio('/draw_sound.mp3');
+      audioDraw.play();
+    }
+  },[winner, squares])
 
   return (
     <>
@@ -60,7 +73,7 @@ export default function App() {
             <Square value={squares[8]} onSquareClick={()=> clickHandler(8)} />
           </div>
           <h4 className='turnAndWin'>{status}</h4>
-          { winner ? (
+          { winner || !squares.includes(null) ? (
             <h6 className='turnAndWin'>Click Reset Button To Start Over!</h6>
           ): null}
           <div>
