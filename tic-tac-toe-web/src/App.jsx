@@ -9,13 +9,20 @@ function Square({value, onSquareClick}) { // value is a prop that declared in ap
 }
 
 export default function App() {
+  const [xItIs, setXItIs] = useState(true) // true by default
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   // Function HandlerClick
   function clickHandler(i) {
     const nextSquares = squares.slice();
-    nextSquares[i] = 'x';
+
+    if(xItIs) { // alwyas true 
+      nextSquares[i] = 'x';
+    } else { // when it false change it to o
+      nextSquares[i] = 'o';
+    }
     setSquares(nextSquares);
+    setXItIs(!xItIs); // every condition done it will set the x as not x "!x" so it will false in the next render condition so that the 'o' player can play
   }
   return (
     <>
