@@ -14,6 +14,9 @@ export default function App() {
 
   // Function HandlerClick
   function clickHandler(i) {
+    if(squares[i]) {
+      return; // if the squares/box has value then return it don't override it
+    }
     const nextSquares = squares.slice();
 
     if(xItIs) { // alwyas true 
@@ -24,6 +27,7 @@ export default function App() {
     setSquares(nextSquares);
     setXItIs(!xItIs); // every condition done it will set the x as not x "!x" so it will false in the next render condition so that the 'o' player can play
   }
+
   return (
     <>
       <div className="container">
