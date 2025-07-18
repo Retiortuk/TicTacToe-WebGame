@@ -14,6 +14,8 @@ export default function App() {
 
   // Function HandlerClick
   function clickHandler(i) {
+    const audioClick = new Audio('/click_sfx.mp3');
+    audioClick.play();
     if(squares[i] || rulesWin(squares)) {
       return; // if the squares/box has value and somebody is win then return it don't override it and stop the games
     }
