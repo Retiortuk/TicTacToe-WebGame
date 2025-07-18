@@ -64,7 +64,7 @@ export default function App() {
             <h6 className='turnAndWin'>Click Reset Button To Start Over!</h6>
           ): null}
           <div>
-            <button className='reset-btn' onClick={window.location.reload()}>Reset</button>
+            <button className='reset-btn' onClick={()=> window.location.reload()}>Reset</button>
           </div>
         </div>
       </div>
