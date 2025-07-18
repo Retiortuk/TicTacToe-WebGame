@@ -12,12 +12,10 @@ export default function App() {
   const [xItIs, setXItIs] = useState(true) // true by default
   const [squares, setSquares] = useState(Array(9).fill(null));
 
-  const gesa = 'gesa';
-
   // Function HandlerClick
   function clickHandler(i) {
-    if(squares[i]) {
-      return; // if the squares/box has value then return it don't override it
+    if(squares[i] || rulesWin(squares)) {
+      return; // if the squares/box has value and somebody is win then return it don't override it and stop the games
     }
     const nextSquares = squares.slice();
 
@@ -28,6 +26,17 @@ export default function App() {
     }
     setSquares(nextSquares);
     setXItIs(!xItIs); // every condition done it will set the x as not x "!x" so it will false in the next render condition so that the 'o' player can play
+
+  }
+
+  // if win
+  const winner = rulesWin(squares);
+  let status;
+
+  if(winner) {
+    status = `Congratulations ${winner} is the Winner!`;
+  } else {
+    status = "Player " + (xItIs ? 'x' : 'o') + " Turn";
   }
 
   return (
@@ -50,7 +59,7 @@ export default function App() {
             <Square value={squares[7]} onSquareClick={()=> clickHandler(7)} />
             <Square value={squares[8]} onSquareClick={()=> clickHandler(8)} />
           </div>
-          <h5 className='turnAndWin'>Who's Turn and who's Won:</h5>
+          <h5 className='turnAndWin'>{status}</h5>
           <div>
             <button className='reset-btn'>Reset</button>
           </div>
