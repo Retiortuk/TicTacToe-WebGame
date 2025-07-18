@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { useState } from 'react'
+import { useState } from 'react';
+import clickSound from './assets/click-sfx.mp3';
+import drawSound from './assets/draw-sound.mp3';
+import victorySound from './assets/victory-sound.mp3';
 
 function Square({value, onSquareClick}) { // value is a prop that declared in app() value of value is {squares}, onSquareClick is the same
 
@@ -14,7 +17,7 @@ export default function App() {
 
   // Function HandlerClick
   function clickHandler(i) {
-    const audioClick = new Audio('/click-sfx.mp3');
+    const audioClick = new Audio(clickSound);
     audioClick.play();
     if(squares[i] || rulesWin(squares)) {
       return; // if the squares/box has value and somebody is win then return it don't override it and stop the games
@@ -43,13 +46,13 @@ export default function App() {
     status = "Player " + (xItIs ? 'x' : 'o') + " Turn";
   }
 
-  // Play Audio If WIN
+  // Play Audio If WIN and DRAW
   useEffect(() => {
     if(winner) {
-      const audioWin = new Audio('/Victory_Sound_Effect.mp3');
+      const audioWin = new Audio(victorySound);
       audioWin.play();
     } else if (!squares.includes(null)) {
-      const audioDraw = new Audio('/draw_sound.mp3');
+      const audioDraw = new Audio(drawSound);
       audioDraw.play();
     }
   },[winner, squares])
