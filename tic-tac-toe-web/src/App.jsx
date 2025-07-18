@@ -59,9 +59,12 @@ export default function App() {
             <Square value={squares[7]} onSquareClick={()=> clickHandler(7)} />
             <Square value={squares[8]} onSquareClick={()=> clickHandler(8)} />
           </div>
-          <h5 className='turnAndWin'>{status}</h5>
+          <h4 className='turnAndWin'>{status}</h4>
+          { winner ? (
+            <h6 className='turnAndWin'>Click Reset Button To Start Over!</h6>
+          ): null}
           <div>
-            <button className='reset-btn'>Reset</button>
+            <button className='reset-btn' onClick={window.location.reload()}>Reset</button>
           </div>
         </div>
       </div>
